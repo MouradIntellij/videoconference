@@ -152,9 +152,9 @@ npm start
 
 ## 👨‍💻 Auteurs
 
-Projet de stage - TT4 Winter 2026
-LaSalle College
+Projet de stage - TT4 Winter 2026   
+LaSalle College   Mourad Sehboub
 
 ## 📄 License
 
-MIT
+Mourad Sehboub
