@@ -1,15 +1,24 @@
+import { v4 as uuidv4 } from 'uuid';
 import express from 'express';
-import { createServer } from 'http';
+import { createServer } from 'http'; // 🔥 IMPORTANT
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
+
+// ✅ créer le serveur HTTP
 const httpServer = createServer(app);
+
+// ✅ Socket.IO attaché au serveur
 const io = new Server(httpServer, {
   cors: {
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
-    methods: ['GET', 'POST']
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://videoconference-server-delta.vercel.app\n' // 🔥 à remplacer
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
@@ -33,11 +42,13 @@ app.get('/api/rooms/:roomId', (req, res) => {
 
 app.post('/api/rooms', (req, res) => {
   const roomId = uuidv4();
+
   rooms.set(roomId, {
     id: roomId,
     participants: [],
     createdAt: new Date().toISOString()
   });
+
   res.json({ roomId });
 });
 
